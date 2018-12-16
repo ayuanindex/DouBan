@@ -27,11 +27,6 @@ public class HttpRequest {
         return null;
     }
 
-    public static Bitmap httpGetBitmap(String path) {
-
-        return null;
-    }
-
     private static String httpSetting(String[] parpam) {
         try {
             for (int i = 0; i < parpam.length; i++) {
