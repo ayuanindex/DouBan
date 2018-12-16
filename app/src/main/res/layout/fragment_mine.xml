@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_one"
+            style="@style/TabButtonStyle"
+            android:text="讨论" />
+
+        <Button
+            android:id="@+id/btn_two"
+            style="@style/TabButtonStyle"
+            android:text="想看" />
+
+        <Button
+            android:id="@+id/btn_three"
+            style="@style/TabButtonStyle"
+            android:text="在看" />
+
+        <Button
+            android:id="@+id/btn_four"
+            style="@style/TabButtonStyle"
+            android:text="看过" />
+
+        <Button
+            android:id="@+id/btn_five"
+            style="@style/TabButtonStyle"
+            android:text="影评" />
+
+        <Button
+            android:id="@+id/btn_six"
+            style="@style/TabButtonStyle"
+            android:text="影人" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:visibility="visible" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:visibility="invisible" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:visibility="invisible" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:visibility="invisible" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:visibility="invisible" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"></LinearLayout>
+</LinearLayout>
