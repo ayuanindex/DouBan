@@ -24,13 +24,22 @@ public class GenuineHot extends Fragment {
     private ListView lv_movie_list;
     private String[] strings;
     private TextView test;
+    private View rootView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        /*if (rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_hot_genuinehot, null);
+        }
+        ViewGroup parent = (ViewGroup) rootView.getParent();
+        if (parent != null) {
+            parent.removeView(rootView);
+        }*/
         View inflate = inflater.inflate(R.layout.fragment_hot_genuinehot, null);
         initView(inflate);
         initData();
+
         return inflate;
     }
 
@@ -48,7 +57,7 @@ public class GenuineHot extends Fragment {
                 Iterator<Subjects> iterator = subjects.iterator();
                 while (iterator.hasNext()) {
                     Subjects subject = iterator.next();
-                    Log.i(TAG, "哈哈:解析完成了" + subject.getAlt());
+                    Log.i(TAG, "哈哈:解析完成了" + subject.toString());
                 }
             }
         }.start();
@@ -78,8 +87,10 @@ public class GenuineHot extends Fragment {
             } else {
                 view = convertView;
             }
+
+
+
             return view;
         }
     }
-
 }

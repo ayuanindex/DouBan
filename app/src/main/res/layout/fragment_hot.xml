@@ -25,8 +25,8 @@
             android:background="@drawable/shape_search_bg"
             android:drawableLeft="@android:drawable/ic_menu_search"
             android:gravity="center_vertical"
-            android:paddingLeft="90dp"
-            android:paddingRight="90dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="60dp"
             android:text="电影/电视剧/影人"
             android:textAlignment="center" />
     </LinearLayout>

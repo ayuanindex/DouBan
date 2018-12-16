@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:paddingLeft="20dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
 
     <ImageView
         android:id="@+id/iv_logo"
@@ -86,15 +88,16 @@
 
         <Button
             android:id="@+id/btn_purchasetickets"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
+            android:layout_width="50dp"
+            android:layout_height="23dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@drawable/selector_btn_bg"
             android:gravity="center"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="购票"
-            android:textColor="#ff697a" />
+            android:textColor="#ff697a"
+            android:textSize="10sp" />
     </LinearLayout>
 </RelativeLayout>

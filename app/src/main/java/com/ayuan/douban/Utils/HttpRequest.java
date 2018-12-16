@@ -1,5 +1,6 @@
 package com.ayuan.douban.Utils;
 
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -23,6 +24,11 @@ public class HttpRequest {
         if (movieDetail != null) {
             return movieDetail;
         }
+        return null;
+    }
+
+    public static Bitmap httpGetBitmap(String path) {
+
         return null;
     }
 

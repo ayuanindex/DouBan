@@ -61,7 +61,6 @@ public class HotFragment extends Fragment implements View.OnClickListener {
         fragmentTransaction.commit();
     }
 
-    @SuppressLint("NewApi")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -73,6 +72,7 @@ public class HotFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_right:
                 v_left.setVisibility(View.INVISIBLE);
                 v_right.setVisibility(View.VISIBLE);
+                replaceFragment(new ComingSoon());
                 break;
             case R.id.tv_search:
                 Toast.makeText(getActivity(), "正在搜索", Toast.LENGTH_SHORT).show();
