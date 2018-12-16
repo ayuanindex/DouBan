@@ -45,14 +45,21 @@
             android:layout_width="wrap_content"
             android:layout_height="2dp"
             android:layout_weight="1"
+            android:background="#000000"
             android:visibility="visible" />
 
         <View
             android:layout_width="wrap_content"
             android:layout_height="2dp"
             android:layout_weight="1"
+            android:background="#000000"
             android:visibility="invisible" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#d7d7d7" />
 
     <LinearLayout
         android:id="@+id/ll_find"
