@@ -1,7 +1,7 @@
 package com.ayuan.douban.vo;
 
 public class Rating {
-    private Integer average;
+    private double average;
     private Detail details;
     private Integer max;
     private Integer min;
@@ -10,7 +10,7 @@ public class Rating {
     public Rating() {
     }
 
-    public Rating(Integer average, Detail details, Integer max, Integer min, Integer stars) {
+    public Rating(double average, Detail details, Integer max, Integer min, Integer stars) {
         this.average = average;
         this.details = details;
         this.max = max;
@@ -18,11 +18,11 @@ public class Rating {
         this.stars = stars;
     }
 
-    public Integer getAverage() {
+    public double getAverage() {
         return average;
     }
 
-    public void setAverage(Integer average) {
+    public void setAverage(double average) {
         this.average = average;
     }
 

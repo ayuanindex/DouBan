@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="20dp"
@@ -43,6 +44,7 @@
                 style="@android:style/Widget.Holo.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:max="10"
                 android:outlineAmbientShadowColor="#ffe100"
                 android:outlineSpotShadowColor="#ffe100" />
 
@@ -101,7 +103,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="购票"
-            android:textColor="#ff697a"
+            android:textColor="@drawable/selector_type"
             android:textSize="10sp" />
     </LinearLayout>
 </RelativeLayout>

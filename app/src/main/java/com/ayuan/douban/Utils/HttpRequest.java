@@ -1,5 +1,6 @@
 package com.ayuan.douban.Utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
@@ -19,15 +20,15 @@ public class HttpRequest {
     private static final String TAG = "HttpRequest";
     private static String IP = "https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&";
 
-    public static ArrayList<Subjects> httpGetMovie(String[] parpam) {
-        ArrayList<Subjects> movieDetail = AnalyzeJson.getMovieDetail(httpSetting(parpam));
+    public static ArrayList<Subjects> httpGetMovie(Context context,String[] parpam) {
+        ArrayList<Subjects> movieDetail = AnalyzeJson.getMovieDetail(context,httpSetting(parpam));
         if (movieDetail != null) {
             return movieDetail;
         }
         return null;
     }
 
-    private static String httpSetting(String[] parpam) {
+    private static String httpSetting( String[] parpam) {
         try {
             for (int i = 0; i < parpam.length; i++) {
                 parpam[i] = URLEncoder.encode(parpam[i]);

@@ -1,5 +1,7 @@
 package com.ayuan.douban.Utils;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 
 import com.ayuan.douban.vo.Actor;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 public class AnalyzeJson {
     private static final String TAG = "AnalyzeJson";
 
-    public static ArrayList<Subjects> getMovieDetail(String jsonString) {
+    public static ArrayList<Subjects> getMovieDetail(Context context, String jsonString) {
         if (!TextUtils.isEmpty(jsonString)) {
             try {
                 JSONObject rootJsonObject = new JSONObject(jsonString);
@@ -57,9 +59,12 @@ public class AnalyzeJson {
                         String id = subJsonObject.optString("id");
 
                         JSONObject images = subJsonObject.optJSONObject("images");
-                        String large = images.optString("large");
+                        Bitmap large = HttpGetBitmap.getBitmap(images.optString("largeg"), context);
+                        Bitmap medium = HttpGetBitmap.getBitmap(images.optString("medium"), context);
+                        Bitmap small = HttpGetBitmap.getBitmap(images.optString("small"), context);
+                        /*String large = images.optString("large");
                         String medium = images.optString("medium");
-                        String small = images.optString("small");
+                        String small = images.optString("small");*/
                         Images images_vo = new Images(large, medium, small);
 
                         String mainland_pubdate = subJsonObject.optString("mainland_pubdate");
@@ -74,7 +79,7 @@ public class AnalyzeJson {
                         }
 
                         JSONObject rating = subJsonObject.optJSONObject("rating");
-                        int average = rating.optInt("average");
+                        double average = rating.optDouble("average");
                         JSONObject details = rating.optJSONObject("details");
                         int _1 = details.optInt("1");
                         int _2 = details.optInt("2");
@@ -94,7 +99,7 @@ public class AnalyzeJson {
                         String title1 = rootJsonObject.optString("title");
                         int total = rootJsonObject.optInt("total");
 
-                        Subjects subjects_vo = new Subjects(alt, castsList, collect_count, directorsList, durationList, genresList, has_video, id, images_vo, mainland_pubdate, original_title, pubdates, rating_vo, subtype, title, year,title1, total);
+                        Subjects subjects_vo = new Subjects(alt, castsList, collect_count, directorsList, durationList, genresList, has_video, id, images_vo, mainland_pubdate, original_title, pubdates, rating_vo, subtype, title, year, title1, total);
                         subjects.add(subjects_vo);
                     }
                     return subjects;
