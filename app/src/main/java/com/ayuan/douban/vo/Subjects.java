@@ -191,6 +191,17 @@ public class Subjects {
         this.total = total;
     }
 
+    public String getActors() {
+        if (actor.isEmpty()) {
+            return "";
+        }
+        StringBuffer stringBuffer = new StringBuffer("演员:");
+        for (Actor actor1 : actor) {
+            stringBuffer.append("/" + actor1.getName());
+        }
+        return stringBuffer.toString();
+    }
+
     @Override
     public String toString() {
         return "Subjects{" +

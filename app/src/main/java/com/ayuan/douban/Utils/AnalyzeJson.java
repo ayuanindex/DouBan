@@ -59,12 +59,12 @@ public class AnalyzeJson {
                         String id = subJsonObject.optString("id");
 
                         JSONObject images = subJsonObject.optJSONObject("images");
-                        Bitmap large = HttpGetBitmap.getBitmap(images.optString("largeg"), context);
+                        /*Bitmap large = HttpGetBitmap.getBitmap(images.optString("largeg"), context);
                         Bitmap medium = HttpGetBitmap.getBitmap(images.optString("medium"), context);
-                        Bitmap small = HttpGetBitmap.getBitmap(images.optString("small"), context);
-                        /*String large = images.optString("large");
+                        Bitmap small = HttpGetBitmap.getBitmap(images.optString("small"), context);*/
+                        String large = images.optString("large");
                         String medium = images.optString("medium");
-                        String small = images.optString("small");*/
+                        String small = images.optString("small");
                         Images images_vo = new Images(large, medium, small);
 
                         String mainland_pubdate = subJsonObject.optString("mainland_pubdate");

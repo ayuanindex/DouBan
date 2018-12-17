@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -24,11 +25,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ayuan.douban.R;
+import com.ayuan.douban.Utils.HttpGetBitmap;
 import com.ayuan.douban.Utils.HttpRequest;
+import com.ayuan.douban.vo.Actor;
 import com.ayuan.douban.vo.ListItem;
 import com.ayuan.douban.vo.Subjects;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.logging.SimpleFormatter;
 
 public class GenuineHot extends Fragment {
 
@@ -82,14 +88,17 @@ public class GenuineHot extends Fragment {
     private void initData() {
         /*listItems = new ArrayList<>();*/
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setTitle("加载中...");
+        progressDialog.setTitle("电影准备中");
+        progressDialog.setMessage("正在加载电影票");
         progressDialog.show();
         new Thread() {
             @Override
             public void run() {
                 super.run();
-                subjects = HttpRequest.httpGetMovie(getActivity(), new String[]{"北京", "0", "2", "", ""});
+                subjects = HttpRequest.httpGetMovie(getActivity(), new String[]{"北京", "0", "100", "", ""});
                 if (subjects != null) {
+                    progressDialog.dismiss();
+                    progressDialog = null;
                     Message message = Message.obtain();
                     message.what = 1;
                     mHandler.sendMessage(message);
@@ -116,13 +125,28 @@ public class GenuineHot extends Fragment {
         }
 
         @Override
+        public void notifyDataSetChanged() {
+            super.notifyDataSetChanged();
+            Message obtain = Message.obtain();
+            obtain.what = 1;
+            mHandler.sendMessage(obtain);
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+
+            return super.getItemViewType(position);
+        }
+
+        @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            View view;
+            final View view;
             if (convertView == null) {
                 view = View.inflate(getActivity(), R.layout.view_item_movie, null);
             } else {
                 view = convertView;
             }
+            final ImageView viewWithTag = (ImageView) view.findViewWithTag(R.id.lv_movie_list);
             RelativeLayout rl_root = (RelativeLayout) view.findViewById(R.id.rl_root);
             final ImageView iv_logo = (ImageView) view.findViewById(R.id.iv_logo);
             final TextView tv_movie_name = (TextView) view.findViewById(R.id.tv_movie_name);
@@ -132,15 +156,35 @@ public class GenuineHot extends Fragment {
             final TextView tv_actor = (TextView) view.findViewById(R.id.tv_actor);
             TextView tv_seen = (TextView) view.findViewById(R.id.tv_seen);
             final Button btn_purchasetickets = (Button) view.findViewById(R.id.btn_purchasetickets);
-            Subjects item = getItem(position);
-            Bitmap small = item.getImages().getSmall();
-            iv_logo.setImageBitmap(small);
+            final Subjects item = getItem(position);
+
+            Bitmap bitmap = HttpGetBitmap.getBitmap(item.getImages().getSmall(), getActivity());
+            iv_logo.setImageBitmap(bitmap);
 
             tv_movie_name.setText(item.getTitle());
 
             double average = item.getRating().getAverage();
-            rb_mark.setRating((float) average);
+            if (average > 0) {
+                float pin = (float) (average / 10f);
+                rb_mark.setRating(pin * 5f);
+                tv_mark.setText(average + "");
+                rb_mark.setVisibility(View.VISIBLE);
+            } else {
+                rb_mark.setVisibility(View.GONE);
+                tv_mark.setText("暂无评分");
+                tv_mark.setTextSize(11);
+            }
 
+            tv_director.setText("导演:" + item.getDirectors().get(0).getName());
+
+            tv_actor.setText(item.getActors());
+
+            Integer collect_count = item.getCollect_count();
+            if (collect_count > 10000) {
+                tv_seen.setText(new DecimalFormat("#.0").format(collect_count / 10000) + "万人看过");
+            } else {
+                tv_seen.setText(collect_count + "人看过");
+            }
 
             btn_purchasetickets.setOnClickListener(new View.OnClickListener() {
                 @Override

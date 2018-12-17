@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="20dp"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp">
+    android:paddingLeft="15dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
 
     <ImageView
         android:id="@+id/iv_logo"
@@ -28,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxEms="9"
+            android:maxEms="7"
             android:maxLines="2"
             android:text="海王"
             android:textColor="#000000"
@@ -45,14 +44,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:max="10"
-                android:outlineAmbientShadowColor="#ffe100"
-                android:outlineSpotShadowColor="#ffe100" />
+                android:layout_marginRight="5dp"
+                android:numStars="5"
+                android:stepSize="0.5" />
 
             <TextView
                 android:id="@+id/tv_mark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:text="8.1" />
         </LinearLayout>
 
@@ -77,11 +76,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="110dp"
-        android:layout_toRightOf="@+id/ll_center"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingRight="15dp">
 
         <TextView
             android:id="@+id/tv_seen"
@@ -94,16 +94,16 @@
 
         <Button
             android:id="@+id/btn_purchasetickets"
-            android:layout_width="50dp"
-            android:layout_height="23dp"
+            android:layout_width="60dp"
+            android:layout_height="33dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@drawable/selector_btn_bg"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
             android:text="购票"
             android:textColor="@drawable/selector_type"
-            android:textSize="10sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 </RelativeLayout>
