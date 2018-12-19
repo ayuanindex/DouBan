@@ -7,8 +7,6 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.ayuan.douban.R;
 import com.ayuan.douban.fragment.FindAPieceFragment;
@@ -41,7 +39,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //加载默认的fragment
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.ll_fragment, new HotFragment());
+        fragmentTransaction.replace(R.id.ll_fragment, new HotFragment(), "HotFragment");
         fragmentTransaction.commit();
     }
 
@@ -53,20 +51,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.btn_hot:
                 //底部热映按钮
-                replaceFragment(new HotFragment());
+                replaceFragment(new HotFragment(), "HotFragment");
                 break;
             case R.id.btn_find:
                 //底部找片按钮
-                replaceFragment(new FindAPieceFragment());
+                replaceFragment(new FindAPieceFragment(), "FindAPieceFragment");
                 break;
             case R.id.btn_mine:
                 //底部我的按钮
-                replaceFragment(new MineFragment());
+                replaceFragment(new MineFragment(), "MineFragment");
                 break;
         }
     }
 
-    private void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment, String tag) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.ll_fragment, fragment);

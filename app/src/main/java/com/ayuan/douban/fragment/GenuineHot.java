@@ -2,18 +2,23 @@ package com.ayuan.douban.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -27,14 +32,13 @@ import android.widget.Toast;
 import com.ayuan.douban.R;
 import com.ayuan.douban.Utils.HttpGetBitmap;
 import com.ayuan.douban.Utils.HttpRequest;
-import com.ayuan.douban.vo.Actor;
+import com.ayuan.douban.Utils.SPUtils;
+import com.ayuan.douban.activity.WebViewActivity;
 import com.ayuan.douban.vo.ListItem;
 import com.ayuan.douban.vo.Subjects;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.logging.SimpleFormatter;
 
 public class GenuineHot extends Fragment {
 
@@ -42,7 +46,6 @@ public class GenuineHot extends Fragment {
     private ListView lv_movie_list;
     private String[] strings;
     private TextView test;
-    private static View rootView = null;
     private ProgressDialog progressDialog;
     private ArrayList<Subjects> subjects;
     private ArrayList<ListItem> listItems;
@@ -62,6 +65,7 @@ public class GenuineHot extends Fragment {
             }
         }
     };
+    private WebView webView;
 
     @Nullable
     @Override
@@ -75,27 +79,23 @@ public class GenuineHot extends Fragment {
     private void initView(View inflate) {
         lv_movie_list = (ListView) inflate.findViewById(R.id.lv_movie_list);
 
-        lv_movie_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
-
+        FragmentManager fragmentManager = getActivity().getFragmentManager();
+        HotFragment hotfragment = (HotFragment) fragmentManager.findFragmentByTag("HotFragment");
     }
 
-    @SuppressLint("InflateParams")
     private void initData() {
-        /*listItems = new ArrayList<>();*/
+        webView = new WebView(getActivity());
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("电影准备中");
         progressDialog.setMessage("正在加载电影票");
         progressDialog.show();
+        final String cityName = SPUtils.getString(getActivity(), SPUtils.CITYNAME, "北京");
+        Log.i(TAG, "哈哈:这里取到的城市:" + cityName);
         new Thread() {
             @Override
             public void run() {
                 super.run();
-                subjects = HttpRequest.httpGetMovie(getActivity(), new String[]{"北京", "0", "100", "", ""});
+                subjects = HttpRequest.httpGetMovie(getActivity(), new String[]{cityName, "0", "100", "", ""});
                 if (subjects != null) {
                     progressDialog.dismiss();
                     progressDialog = null;
@@ -188,10 +188,13 @@ public class GenuineHot extends Fragment {
 
             btn_purchasetickets.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Toast.makeText(getActivity(), "哈哈:点击了按钮:" + position, Toast.LENGTH_SHORT).show();
+                public void onClick(final View v) {
+                    Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                    intent.putExtra("path", item.getAlt());
+                    startActivity(intent);
                 }
             });
+
             rl_root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

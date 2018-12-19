@@ -19,7 +19,7 @@
             android:textAlignment="center"></Spinner>
 
         <TextView
-            android:id="@+id/tv_search"
+            android:id="@+id/tv_search_hot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_search_bg"
